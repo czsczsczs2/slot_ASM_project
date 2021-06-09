@@ -102,9 +102,27 @@ INCLUDE Irvine32.inc
 	star	   DWORD OFFSET star1, OFFSET star2, OFFSET star3, OFFSET star4, OFFSET star5, OFFSET star6, OFFSET star7, OFFSET star8, OFFSET star9
 
 	count DWORD 0
-	random_num DWORD 0; �`�@�]�X��
+	random_num DWORD 0; 總共跑幾次
 	now_block DWORD 0	
 	time_interval DWORD 0
+
+	; INFO: 本區為下注邏輯所要用到的變數(written by PR)
+	player_token DWORD 100 ; 玩家代幣數量(初始為100)
+	gi1 BYTE "watermelon (x2)  ", 0
+	gi2 BYTE "banana (x2)      ", 0
+	gi3 BYTE "star (x4)        ", 0
+	gi4 BYTE "apple (x4)       ", 0
+	gi5 BYTE "bell (x6)        ", 0
+	gi6 BYTE "diamond (x8)     ", 0
+	gi7 BYTE "double7 (x10)    ", 0
+	gambling_item DWORD OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
+	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; 賠率(按照上面字串順序)
+	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; 玩家下注量(按照上面字串順序)
+	pos DWORD 0
+	money DWORD 0
+	tmp_pos DWORD 0 ; 交換數值用的
+	;--- 結束 ---
+
 .code ;
 
 ;-----------------------------------------
@@ -112,7 +130,7 @@ Interface PROC
 ;-----------------------------------------
 	push ecx
 
-;�Ĥ@�Ƥ��G��
+;第一排水果區
 
 	call horizon_edge
 
@@ -156,7 +174,7 @@ line1:
     jne line1
 
 next_line2:
-;�ĤG�Ƥ��G+�Ů�
+;第二排水果+空格
 	mov count, 0
 	mov ecx, 9
 line2:
@@ -181,7 +199,7 @@ space1:
 	add count, 4
 	loop line2
 
-;�ĤT�Ƥ��G+�Ů�
+;第三排水果+空格
 	mov count, 0
 	mov ecx, 9
 line3:
@@ -206,7 +224,7 @@ space2:
 	add count, 4
 	loop line3
 
-;�ĥ|�Ƥ��G+�Ů�
+;第四排水果+空格
 
 	mov count, 0
 	mov ecx, 8
@@ -233,7 +251,7 @@ space3:
 	loop line4
 	
 	call horizon_edge
-;�Ĥ�����G
+;第五行水果
 	mov count, 0
 	mov ecx, 9
 line5:
@@ -336,7 +354,7 @@ play PROC
 rotate:
 	mov dl,0
 	mov dh,0
-	call gotoxy ;��s�ù��e��
+	call gotoxy ;刷新螢幕畫面
 
 	.IF now_block <= 0
 		add now_block, 19
@@ -344,7 +362,7 @@ rotate:
 		dec now_block
 	.ENDIF
 
-	call Interface		;�e����
+	call Interface		;畫介面
 	
 	.IF ecx <= 5
 		push ecx
@@ -356,19 +374,53 @@ rotate:
 	ret
 play ENDP
 
+;-----------------------------------------
+bet PROC USES eax ecx edx esi
+; INFO: 玩家下注function
+; REQUIRE: pos(位置 0,4,8,...,24), money(金額)
+; RETURN: (none)
+;-----------------------------------------
+	mov esi, pos
+	mov eax, money
+	mov gambling_token[esi], eax
+
+	mov tmp_pos, 0 ; 字串位址先存到tmp_pos
+	mov esi, OFFSET gambling_item ; token 位址
+	mov ecx, 7
+	L1:
+		mov edx, [esi]
+		call WriteString
+		add esi, 4
+		push esi ; 暫存
+
+		mov esi, tmp_pos
+		mov eax, gambling_token[esi]
+		call WriteInt
+		add esi, 4
+		mov tmp_pos, esi ; 存回去
+		pop esi
+		call Crlf
+	loop L1
+	ret
+bet ENDP
+
 main PROC
 
 	call Randomize
 	mov eax, 20
 	call RandomRange
-	add eax, 10				;�`�@�n��X��
+	add eax, 10				;總共要轉幾格
 	mov random_num, eax
 	mov eax, 19
 	call RandomRange
 	inc eax
-	mov now_block, eax		;�{�b��쪺��m
+	mov now_block, eax		;現在轉到的位置
 
 	call play
+
+	mov pos, 4  ; 模擬鈺修傳值進來(4: 傳入陣列第2個位置)
+	mov money, 100  ; 模擬鈺修傳值進來
+	call bet
 	
 	Invoke ExitProcess, 0
 main ENDP

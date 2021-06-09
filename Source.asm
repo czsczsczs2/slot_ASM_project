@@ -102,12 +102,12 @@ INCLUDE Irvine32.inc
 	star	   DWORD OFFSET star1, OFFSET star2, OFFSET star3, OFFSET star4, OFFSET star5, OFFSET star6, OFFSET star7, OFFSET star8, OFFSET star9
 
 	count DWORD 0
-	random_num DWORD 0; ç¸½å…±è·‘å¹¾æ¬¡
-	now_block DWORD 0	
+	random_num DWORD 0; Á`¦@¶]´X¦¸
+	now_block DWORD 20	
 	time_interval DWORD 0
 
-	; INFO: æœ¬å€ç‚ºä¸‹æ³¨é‚è¼¯æ‰€è¦ç”¨åˆ°çš„è®Šæ•¸(written by PR)
-	player_token DWORD 100 ; ç©å®¶ä»£å¹£æ•¸é‡(åˆå§‹ç‚º100)
+	; INFO: ¥»°Ï¬°¤Uª`ÅŞ¿è©Ò­n¥Î¨ìªºÅÜ¼Æ(written by PR)
+	player_token DWORD 100 ; ª±®a¥N¹ô¼Æ¶q(ªì©l¬°100)
 	gi1 BYTE "watermelon (x2)  ", 0
 	gi2 BYTE "banana (x2)      ", 0
 	gi3 BYTE "star (x4)        ", 0
@@ -116,12 +116,12 @@ INCLUDE Irvine32.inc
 	gi6 BYTE "diamond (x8)     ", 0
 	gi7 BYTE "double7 (x10)    ", 0
 	gambling_item DWORD OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
-	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; è³ ç‡(æŒ‰ç…§ä¸Šé¢å­—ä¸²é †åº)
-	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; ç©å®¶ä¸‹æ³¨é‡(æŒ‰ç…§ä¸Šé¢å­—ä¸²é †åº)
+	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; ½ß²v(«ö·Ó¤W­±¦r¦ê¶¶§Ç)
+	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; ª±®a¤Uª`¶q(«ö·Ó¤W­±¦r¦ê¶¶§Ç)
 	pos DWORD 0
 	money DWORD 0
-	tmp_pos DWORD 0 ; äº¤æ›æ•¸å€¼ç”¨çš„
-	;--- çµæŸ ---
+	tmp_pos DWORD 0 ; ¥æ´«¼Æ­È¥Îªº
+	;--- µ²§ô ---
 
 .code ;
 
@@ -130,7 +130,7 @@ Interface PROC
 ;-----------------------------------------
 	push ecx
 
-;ç¬¬ä¸€æ’æ°´æœå€
+;²Ä¤@±Æ¤ôªG°Ï
 
 	call horizon_edge
 
@@ -174,7 +174,7 @@ line1:
     jne line1
 
 next_line2:
-;ç¬¬äºŒæ’æ°´æœ+ç©ºæ ¼
+;²Ä¤G±Æ¤ôªG+ªÅ®æ
 	mov count, 0
 	mov ecx, 9
 line2:
@@ -199,7 +199,7 @@ space1:
 	add count, 4
 	loop line2
 
-;ç¬¬ä¸‰æ’æ°´æœ+ç©ºæ ¼
+;²Ä¤T±Æ¤ôªG+ªÅ®æ
 	mov count, 0
 	mov ecx, 9
 line3:
@@ -224,7 +224,7 @@ space2:
 	add count, 4
 	loop line3
 
-;ç¬¬å››æ’æ°´æœ+ç©ºæ ¼
+;²Ä¥|±Æ¤ôªG+ªÅ®æ
 
 	mov count, 0
 	mov ecx, 8
@@ -251,7 +251,7 @@ space3:
 	loop line4
 	
 	call horizon_edge
-;ç¬¬äº”è¡Œæ°´æœ
+;²Ä¤­¦æ¤ôªG
 	mov count, 0
 	mov ecx, 9
 line5:
@@ -354,7 +354,7 @@ play PROC
 rotate:
 	mov dl,0
 	mov dh,0
-	call gotoxy ;åˆ·æ–°è¢å¹•ç•«é¢
+	call gotoxy ;¨ê·s¿Ã¹õµe­±
 
 	.IF now_block <= 0
 		add now_block, 19
@@ -362,7 +362,7 @@ rotate:
 		dec now_block
 	.ENDIF
 
-	call Interface		;ç•«ä»‹é¢
+	call Interface		;µe¤¶­±
 	
 	.IF ecx <= 5
 		push ecx
@@ -370,34 +370,37 @@ rotate:
 		Invoke sleep, time_interval
 		pop ecx
 	.ENDIF
+	push ecx
+	call SetConsoleVibilityFalse
+	pop ecx
 	loop rotate
 	ret
 play ENDP
 
 ;-----------------------------------------
 bet PROC USES eax ecx edx esi
-; INFO: ç©å®¶ä¸‹æ³¨function
-; REQUIRE: pos(ä½ç½® 0,4,8,...,24), money(é‡‘é¡)
+; INFO: ª±®a¤Uª`function
+; REQUIRE: pos(¦ì¸m 0,4,8,...,24), money(ª÷ÃB)
 ; RETURN: (none)
 ;-----------------------------------------
 	mov esi, pos
 	mov eax, money
 	mov gambling_token[esi], eax
 
-	mov tmp_pos, 0 ; å­—ä¸²ä½å€å…ˆå­˜åˆ°tmp_pos
-	mov esi, OFFSET gambling_item ; token ä½å€
+	mov tmp_pos, 0 ; ¦r¦ê¦ì§}¥ı¦s¨ìtmp_pos
+	mov esi, OFFSET gambling_item ; token ¦ì§}
 	mov ecx, 7
 	L1:
 		mov edx, [esi]
 		call WriteString
 		add esi, 4
-		push esi ; æš«å­˜
+		push esi ; ¼È¦s
 
 		mov esi, tmp_pos
 		mov eax, gambling_token[esi]
 		call WriteInt
 		add esi, 4
-		mov tmp_pos, esi ; å­˜å›å»
+		mov tmp_pos, esi ; ¦s¦^¥h
 		pop esi
 		call Crlf
 	loop L1
@@ -405,22 +408,26 @@ bet PROC USES eax ecx edx esi
 bet ENDP
 
 main PROC
+	
+	call interface
+	call SetConsoleVibilityFalse
 
 	call Randomize
 	mov eax, 20
 	call RandomRange
-	add eax, 10				;ç¸½å…±è¦è½‰å¹¾æ ¼
+	add eax, 10				;Á`¦@­nÂà´X®æ
 	mov random_num, eax
 	mov eax, 19
 	call RandomRange
 	inc eax
-	mov now_block, eax		;ç¾åœ¨è½‰åˆ°çš„ä½ç½®
+	mov now_block, eax		;²{¦bÂà¨ìªº¦ì¸m
 
 	call play
 
-	mov pos, 4  ; æ¨¡æ“¬éˆºä¿®å‚³å€¼é€²ä¾†(4: å‚³å…¥é™£åˆ—ç¬¬2å€‹ä½ç½®)
-	mov money, 100  ; æ¨¡æ“¬éˆºä¿®å‚³å€¼é€²ä¾†
+	mov pos, 4  ; ¼ÒÀÀà±­×¶Ç­È¶i¨Ó(4: ¶Ç¤J°}¦C²Ä2­Ó¦ì¸m)
+	mov money, 100  ; ¼ÒÀÀà±­×¶Ç­È¶i¨Ó
 	call bet
+
 	
 	Invoke ExitProcess, 0
 main ENDP

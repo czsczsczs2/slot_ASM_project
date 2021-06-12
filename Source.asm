@@ -121,6 +121,9 @@ INCLUDE Irvine32.inc
 	pos DWORD 0
 	money DWORD 0
 	tmp_pos DWORD 0 ; 交換數值用的
+	select_index DWORD 0 ;選哪個
+	letter_Bet byte "Enter Bet amount here!!", 0AH,0DH,0
+	Beting dword 0; 下注金額
 	;--- 結束 ---
 
 .code ;
@@ -133,7 +136,6 @@ Interface PROC
 ;第一排水果區
 
 	call horizon_edge
-
 	mov count, 0
     mov ecx, 9
 line1:
@@ -347,6 +349,18 @@ paint_block PROC
 	.ENDIF
 	ret
 paint_block ENDP
+
+;-----------------------------------------
+paint_select PROC
+;-----------------------------------------
+	.IF select_index == eax
+		call color_draw
+	.ELSE
+		call default_draw
+	.ENDIF
+	ret
+paint_select ENDP
+
 ;-----------------------------------------
 play PROC
 ;-----------------------------------------
@@ -406,9 +420,147 @@ bet PROC USES eax ecx edx esi
 	loop L1
 	ret
 bet ENDP
+;-----------------------------------------
+KeyIn Proc
+;輸入方向鍵
+;-----------------------------------------
+push eax
+wait_L:
+	mov count ,0
+	mov eax, 0
+	invoke getkeystate, VK_LEFT
+	cmp ah,00FFh
+	je left
+	
+wait_R:
+	mov eax, 0
+	invoke getkeystate, VK_RIGHT
+	cmp ah, 00FFh
+	je right
+	
+wait_S:
+	mov eax, 0
+	invoke getkeystate, VK_SPACE
+	cmp ah, 00FFh
+	je space
+	jmp wait_L
+left:
+	.IF select_index>0
+		dec  select_index
+	.ENDIF
+	mov eax, 1
+	;call WriteHex
+	call gotoxy				;螢幕清空
+	 mov ecx, 8
+nline1:
+	 call Crlf
+loop nline1
 
+	mov ecx, 8
+	p1:
+	call select_phase_print
+	loop p1
+	call waitmsg
+	jmp wait_L
+
+right:
+	.IF select_index<4
+		inc select_index
+	.ENDIF
+	mov eax, 2
+	;call WriteHex
+	call crlf
+	
+	call crlf
+	call gotoxy				;螢幕清空
+	 mov ecx, 8
+nline2:
+	 call Crlf
+loop nline2
+
+	mov ecx, 8
+p2:
+	call select_phase_print
+loop p2
+	call waitmsg
+	jmp wait_L
+
+space:
+	mov eax, 5
+	;call WriteHex
+	call crlf
+	call crlf
+	mov dl,0
+	mov dh,0
+	call clrscr ;刷新螢幕畫面
+
+	pop eax
+	ret
+KeyIn ENDP
+;-----------------------------------------
+
+;-----------------------------------------
+select_phase_print Proc
+;選擇要投殺小
+;-----------------------------------------
+
+ 
+ call Crlf
+ call vertical_edge;
+ mov esi, OFFSET watermelon
+	mov eax, 0
+	call paint_select
+
+    mov esi, OFFSET bell
+	mov eax, 1
+	call paint_select
+
+    mov esi, OFFSET WTF
+	mov eax, 2
+	call paint_select
+
+    mov esi, OFFSET banana
+	mov eax, 3
+	call paint_select
+
+    mov esi, OFFSET apple
+	mov eax, 4
+	call paint_select
+	add count,4
+	ret
+select_phase_print ENDP
+
+
+;-----------------------------------------
+Bet_phase_print Proc
+;選擇要投多少
+;-----------------------------------------
+	PUSHFD
+	push ecx
+	mov ecx ,9
+L1:
+	call crlf
+loop L1
+	pop ecx
+	mov dl,0
+	mov dh,0
+	mov edx,offset letter_Bet
+	call writestring
+
+	mov eax , 0
+	call readint
+	mov Beting, eax
+
+	POPFD
+ret
+Bet_phase_print ENDP
+;-------------------------------------------
 main PROC
 	
+
+	call KeyIn
+	call Bet_phase_print
+
 	call interface
 	call SetConsoleVibilityFalse
 
@@ -428,7 +580,7 @@ main PROC
 	mov money, 100  ; 模擬鈺修傳值進來
 	call bet
 
-	
+	call waitmsg
 	Invoke ExitProcess, 0
 main ENDP
 end main

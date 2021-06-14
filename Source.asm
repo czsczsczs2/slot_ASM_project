@@ -123,7 +123,7 @@ INCLUDE Irvine32.inc
 	tmp_pos DWORD 0 ; 交換數值用的
 	select_index DWORD 0 ;選哪個
 	letter_Bet byte "Enter Bet amount here!!", 0AH,0DH,0
-	letter_Leave byte "Enter BackSpace to leave or R,L to bet!!", 0AH,0DH,0
+	letter_Leave byte "Enter BackSpace to leave or space to bet!!", 0AH,0DH,0
 	Beting dword 0; 下注金額
 	;--- 結束 ---
 
@@ -427,8 +427,10 @@ KeyIn Proc
 ;-----------------------------------------
 push eax
 
-mov select_index,0
- mov ecx, 8
+head:
+	call clrscr
+	mov select_index,0
+	mov ecx, 8
 nline0:
 	 call Crlf
 loop nline0
@@ -437,7 +439,9 @@ loop nline0
 	p0:
 	call select_phase_print
 	loop p0
-
+	call crlf
+	mov edx,offset letter_Leave
+	call writestring
 
 wait_L:
 	mov count ,0
@@ -483,6 +487,9 @@ loop nline1
 	p1:
 	call select_phase_print
 	loop p1
+	call crlf
+	mov edx,offset letter_Leave
+	call writestring
 	call waitmsg
 	jmp wait_L
 
@@ -505,19 +512,23 @@ loop nline2
 p2:
 	call select_phase_print
 loop p2
+	call crlf
+	mov edx,offset letter_Leave
+	call writestring
 	call waitmsg
 	jmp wait_L
 
 space:
 	mov eax, 5
 	;call WriteHex
+	call clrscr
 	call crlf
 	call crlf
 	mov dl,0
 	mov dh,0
-	;call clrscr ;刷新螢幕畫面
 	call Bet_phase_print
-	jmp wait_L
+	;call waitmsg
+	jmp head
 
 
 back:
@@ -599,9 +610,7 @@ loop L1
 	mov eax, Beting
 	mov money, eax  ; 模擬鈺修傳值進來
 	call bet
-	mov edx,offset letter_Leave
-	call writestring
-	;call waitmsg
+	call waitmsg
 	POPFD
 ret
 Bet_phase_print ENDP

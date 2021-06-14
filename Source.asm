@@ -91,6 +91,42 @@ INCLUDE Irvine32.inc
     star8 BYTE "                   ", 0
 	star9 BYTE "-------------------", 0
 
+	again1 BYTE "                   ", 0
+	again2 BYTE "     LBBBBBB:.B    ", 0
+	again3 BYTE "    BBr    jBBB    ", 0
+	again4 BYTE "   QB     rQBBB    ", 0
+	again5 BYTE "   Bj     .        ", 0
+	again6 BYTE "   BB        Q7    ", 0
+	again7 BYTE "    BBv    JBB     ", 0
+	again8 BYTE "     7BBBBBQ7      ", 0
+	again9 BYTE "------------------ ", 0
+
+	mario1 BYTE "           :sv:                       .iii:.				                        ",0
+	mario2 BYTE "           :..K                    .:.r7PZbqPUv.			                                ",0
+	mario3 BYTE "           Br Bu                 riXY:2. YZbdMQBBgv		                                ",0
+	mario4 BYTE "           B7 BX                E.r   iU YdSKKbbggBB5.                                             ",0
+	mario5 BYTE "           B. Bd           .irZg55i:..iIDKK5KXPqbbgQBU                                             ",0
+	mario6 BYTE "        vSLB7 Q5 7YL    :BBBBBRMQBQBBBQMPKISXPKPqPPEEBQi                                           ",0
+	mario7 BYTE "     r7LQr :B. QQs7Dbi7  SBBQRgBBBXPS5jPBBBBBZDgddPPqbbRBs                                         ",0
+	mario8 BYTE "   7SXBL Kv rB:BvUBr. B7  vBBBBBBR:::.UQPuIDBg2dRQgqPPddRBv                                        ",0	
+	mario9 BYTE "   Br:sR57QB:QLvrs7...Bu     7S. :    :  .. .i:rrvPBZEdgZQQPY.                                     ",0
+	mario10 BYTE "  iB:  .ir::.. .  :Lsi          .s:  . iBZR   ... 5BBQBBBBBBBQr                                    ",0
+	mario11 BYTE "   .Br .....:.:..7L:      ..    ...:.. Ugb:  ...:EQMMBg7ir7PBBi                                    ",0
+	mario12 BYTE "    .B:..:::::..IR      .:.......::rr..ii7BB...:MBQBS..:.. v.                                      ",0
+	mario13 BYTE "     JB ::::::: Bi         vr:::irvPBBBBBBBBg::...DBU:i7:..r                                       ",0
+	mario14 BYTE "      B7.:::::..jB     i   rBBBQBBBBBBBBQ7i...:.:... .::.:r:                                       ",0
+	mario15 BYTE "      r::....:::.v   7YLi   .r7JrLvr::..     .::::.j2ri:::                                         ",0
+	mario16 BYTE "        .............: .Yi   :rS   . .       .:rrvsUJ7iMBBBB.                                      ",0
+	mario17 BYTE "          ......... :2J.uR. iSR7      ::iivs2KDggEEdDbEMMPi                                        ",0
+	mario18 BYTE "                .....r2SU2uJUqI     isdBBQgPXdMPPXqSX5X5S5PS27.                                    ",0
+	mario19 BYTE "                    .::r7L7Yd7  .UMBQQ57:isSbQXSSqSKKXIXI5IPEQBBSr                                 ",0
+	mario20 BYTE "                    ::iiriru7 :EQEKIPv    .EEXbPPXPPDgDbEqqSKKZQBBBEi                              ",0
+	mario21 BYTE "                    .:...iIBSIgqUIu2UP22SEgQ5I5PZgDggQBBRBgdPMQq7i.::. ..                          ",0
+	mario22 BYTE "                    .QBQBBBBXU21I1UuU1qbDPKUI5X5KqEEgMBX .gBBq        ..:ri                        ",0
+	mario23 BYTE "                      rBQBBjvUUI121212121UUIIS5X5X5KqZB    :b             ..                       ",0
+	mario24 BYTE "                        :1qJII5I525III525IX5XSKXqKPPDPQP     .           .. :                      ",0
+	mario25 BYTE "                           P121U1U121U12UI2IU52S5XqqqdPBd                     .                    ",0
+
 	watermelon DWORD OFFSET watermelon1, OFFSET watermelon2, OFFSET watermelon3, OFFSET watermelon4, OFFSET watermelon5, OFFSET watermelon6, OFFSET watermelon7, OFFSET watermelon8, OFFSET watermelon9
 	bell	   DWORD OFFSET bell1, OFFSET bell2, OFFSET bell3, OFFSET bell4, OFFSET bell5, OFFSET bell6, OFFSET bell7, OFFSET bell8, OFFSET bell9
 	WTF		   DWORD OFFSET WTF1, OFFSET WTF2, OFFSET WTF3, OFFSET WTF4, OFFSET WTF5, OFFSET WTF6, OFFSET WTF7, OFFSET WTF8, OFFSET WTF9
@@ -100,6 +136,10 @@ INCLUDE Irvine32.inc
 	huh		   DWORD OFFSET huh1, OFFSET huh2, OFFSET huh3, OFFSET huh4, OFFSET huh5, OFFSET huh6, OFFSET huh7, OFFSET huh8, OFFSET huh9
 	seven	   DWORD OFFSET seven1, OFFSET seven2, OFFSET seven3, OFFSET seven4, OFFSET seven5, OFFSET seven6, OFFSET seven7, OFFSET seven8, OFFSET seven9
 	star	   DWORD OFFSET star1, OFFSET star2, OFFSET star3, OFFSET star4, OFFSET star5, OFFSET star6, OFFSET star7, OFFSET star8, OFFSET star9
+	mario_1	   DWORD OFFSET mario1, OFFSET mario2, OFFSET mario3, OFFSET mario4, OFFSET mario5, OFFSET mario6, OFFSET mario7,OFFSET mario8;
+	mario_2	   DWORD OFFSET mario9,OFFSET mario10, OFFSET mario11,OFFSET mario12,OFFSET mario13,OFFSET mario14,OFFSET mario15,OFFSET mario16;
+	mario_3    DWORD OFFSET mario17,OFFSET mario18,OFFSET mario19,OFFSET mario20, OFFSET mario21,OFFSET mario22,OFFSET mario23,OFFSET mario24,OFFSET mario25;
+	again DWORD OFFSET again1, OFFSET again2, OFFSET again3, OFFSET again4, OFFSET again5, OFFSET again6, OFFSET again7, OFFSET again8, OFFSET again9
 
 	count DWORD 0
 	random_num DWORD 0; 總共跑幾次
@@ -181,6 +221,7 @@ line1:
 
 next_line2:
 ;第二排水果+空格
+	mov cnt, 0		;mario_1
 	mov count, 0
 	mov ecx, 9
 line2:
@@ -189,15 +230,20 @@ line2:
 	mov eax, 19
 	call paint_block
 	push ecx
-	mov ecx,99
-space1:	
-    mov al, " "
-    call WriteChar
-    loop space1
+;=================
+	
+	mov esi, OFFSET mario_1	
+	add esi, cnt
+    mov edx, [esi]
+    call WriteString  
+	add cnt, 4
+	
+;=================
+
 	pop ecx
 
 	call vertical_edge
-	mov esi, OFFSET apple
+	mov esi, OFFSET star
 	mov eax, 7
 	call paint_block
 
@@ -206,6 +252,7 @@ space1:
 	loop line2
 
 ;第三排水果+空格
+	mov cnt, 0    ;mario_2
 	mov count, 0
 	mov ecx, 9
 line3:
@@ -214,11 +261,15 @@ line3:
 	mov eax, 18
 	call paint_block
 	push ecx
-	mov ecx,99
-space2:	
-    mov al, " "
-    call WriteChar
-    loop space2
+;=================
+	
+	mov esi, OFFSET mario_2
+	add esi, cnt
+    mov edx, [esi]
+    call WriteString  
+	add cnt, 4
+
+;=================
 	pop ecx
 
 	call vertical_edge
@@ -231,7 +282,7 @@ space2:
 	loop line3
 
 ;第四排水果+空格
-
+	mov cnt, 0		;mario_3
 	mov count, 0
 	mov ecx, 8
 line4:
@@ -240,11 +291,15 @@ line4:
 	mov eax, 17
 	call paint_block
 	push ecx
-	mov ecx,99
-space3:	
-    mov al, " "
-    call WriteChar
-    loop space3
+;=================
+	
+	mov esi, OFFSET mario_3
+	add esi, cnt
+    mov edx, [esi]
+    call WriteString  
+	add cnt, 4
+
+;=================
 	pop ecx
 
 	call vertical_edge

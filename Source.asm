@@ -425,6 +425,19 @@ KeyIn Proc
 ;¿é¤J¤è¦VÁä
 ;-----------------------------------------
 push eax
+
+mov select_index,0
+ mov ecx, 8
+nline0:
+	 call Crlf
+loop nline0
+
+	mov ecx, 8
+	p0:
+	call select_phase_print
+	loop p0
+
+
 wait_L:
 	mov count ,0
 	mov eax, 0
@@ -464,7 +477,7 @@ loop nline1
 	jmp wait_L
 
 right:
-	.IF select_index<4
+	.IF select_index<6
 		inc select_index
 	.ENDIF
 	mov eax, 2
@@ -511,21 +524,34 @@ select_phase_print Proc
 	mov eax, 0
 	call paint_select
 
-    mov esi, OFFSET bell
+	mov esi, OFFSET banana
 	mov eax, 1
 	call paint_select
 
-    mov esi, OFFSET WTF
+	mov esi, OFFSET star
 	mov eax, 2
 	call paint_select
 
-    mov esi, OFFSET banana
+	mov esi, OFFSET apple
 	mov eax, 3
 	call paint_select
 
-    mov esi, OFFSET apple
+
+    mov esi, OFFSET bell
 	mov eax, 4
 	call paint_select
+
+    mov esi, OFFSET wtf
+	mov eax, 5
+	call paint_select
+
+	mov esi, OFFSET seven
+	mov eax, 6
+	call paint_select
+
+    
+
+    
 	add count,4
 	ret
 select_phase_print ENDP
@@ -561,7 +587,7 @@ main PROC
 	call KeyIn
 	call Bet_phase_print
 
-	call interface
+	;call interface
 	call SetConsoleVibilityFalse
 
 	call Randomize

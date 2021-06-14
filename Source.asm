@@ -108,6 +108,7 @@ INCLUDE Irvine32.inc
 
 	; INFO: 本區為下注邏輯所要用到的變數(written by PR)
 	player_token DWORD 100 ; 玩家代幣數量(初始為100)
+	pt  BYTE "YOUR TOKENS:     ", 0
 	gi1 BYTE "watermelon (x2)  ", 0
 	gi2 BYTE "banana (x2)      ", 0
 	gi3 BYTE "star (x4)        ", 0
@@ -115,7 +116,9 @@ INCLUDE Irvine32.inc
 	gi5 BYTE "bell (x6)        ", 0
 	gi6 BYTE "diamond (x8)     ", 0
 	gi7 BYTE "double7 (x10)    ", 0
-	gambling_item DWORD OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
+	info1 BYTE "Success!", 0  ; 投注成功訊息
+	info2 BYTE "Error! You don't have enough token.", 0  ; 投注失敗訊息
+	gambling_item DWORD OFFSET pt, OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
 	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; 賠率(按照上面字串順序)
 	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; 玩家下注量(按照上面字串順序)
 	pos DWORD 0
@@ -399,11 +402,39 @@ bet PROC USES eax ecx edx esi
 ; RETURN: (none)
 ;-----------------------------------------
 	mov esi, pos
-	mov eax, money
-	mov gambling_token[esi], eax
+	mov ecx, player_token
+	add ecx, gambling_token[esi]
+	mov eax, money  ; 附註：eax的值在此函式全程都會為"欲投注代幣"
+
+	.IF ecx >= eax  ; 如果玩家代幣 + 已投注代幣 >= 欲投注代幣
+		mov ecx, gambling_token[esi]
+		.IF ecx >= eax  ; 如果玩家投注變少或不變(已投注代幣 >= 欲投注代幣)
+			sub ecx, eax  ; 計算出差額
+			add ecx, player_token  ; 把錢加回給玩家
+			mov player_token, ecx
+		.ELSE
+			sub ecx, eax  ; 計算出差額
+			add player_token, ecx  ; 加扣差額
+		.ENDIF
+
+		mov gambling_token[esi], eax
+		mov edx, OFFSET info1
+		call WriteString
+		call crlf
+	.ELSE  ; 投注不成立
+		mov edx, OFFSET info2
+		call WriteString
+		call crlf
+	.ENDIF
 
 	mov tmp_pos, 0 ; 字串位址先存到tmp_pos
 	mov esi, OFFSET gambling_item ; token 位址
+	mov edx, [esi]
+	call WriteString  ; 印出玩家token字串
+	add esi, 4
+	mov eax, player_token
+	call WriteInt  ; 印出玩家token數量
+	call crlf
 	mov ecx, 7
 	L1:
 		mov edx, [esi]
@@ -421,6 +452,17 @@ bet PROC USES eax ecx edx esi
 	loop L1
 	ret
 bet ENDP
+
+;-----------------------------------------
+result PROC
+; INFO: 玩家下注function
+; REQUIRE: pos(位置 0,4,8,...,24)
+; RETURN: (none)
+;-----------------------------------------
+	ret
+result ENDP
+
+
 ;-----------------------------------------
 KeyIn Proc
 ;輸入方向鍵

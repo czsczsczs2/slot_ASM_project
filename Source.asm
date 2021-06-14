@@ -91,7 +91,7 @@ INCLUDE Irvine32.inc
     star8 BYTE "                   ", 0
 	star9 BYTE "-------------------", 0
 
-	again1 BYTE "                   ", 0
+	again1 BYTE "      .....        ", 0
 	again2 BYTE "     LBBBBBB:.B    ", 0
 	again3 BYTE "    BBr    jBBB    ", 0
 	again4 BYTE "   QB     rQBBB    ", 0
@@ -141,13 +141,14 @@ INCLUDE Irvine32.inc
 	mario_3    DWORD OFFSET mario17,OFFSET mario18,OFFSET mario19,OFFSET mario20, OFFSET mario21,OFFSET mario22,OFFSET mario23,OFFSET mario24,OFFSET mario25;
 	again DWORD OFFSET again1, OFFSET again2, OFFSET again3, OFFSET again4, OFFSET again5, OFFSET again6, OFFSET again7, OFFSET again8, OFFSET again9
 
+	cnt DWORD 0
 	count DWORD 0
-	random_num DWORD 0; Á`¦@¶]´X¦¸
+	random_num DWORD 0; ç¸½å…±è·‘å¹¾æ¬¡
 	now_block DWORD 20	
 	time_interval DWORD 0
 
-	; INFO: ¥»°Ï¬°¤Uª`ÅŞ¿è©Ò­n¥Î¨ìªºÅÜ¼Æ(written by PR)
-	player_token DWORD 100 ; ª±®a¥N¹ô¼Æ¶q(ªì©l¬°100)
+	; INFO: æœ¬å€ç‚ºä¸‹æ³¨é‚è¼¯æ‰€è¦ç”¨åˆ°çš„è®Šæ•¸(written by PR)
+	player_token DWORD 100 ; ç©å®¶ä»£å¹£æ•¸é‡(åˆå§‹ç‚º100)
 	pt  BYTE "YOUR TOKENS:     ", 0
 	gi1 BYTE "watermelon (x2)  ", 0
 	gi2 BYTE "banana (x2)      ", 0
@@ -156,19 +157,19 @@ INCLUDE Irvine32.inc
 	gi5 BYTE "bell (x6)        ", 0
 	gi6 BYTE "diamond (x8)     ", 0
 	gi7 BYTE "double7 (x10)    ", 0
-	info1 BYTE "Success!", 0  ; §ëª`¦¨¥\°T®§
-	info2 BYTE "Error! You don't have enough token.", 0  ; §ëª`¥¢±Ñ°T®§
+	info1 BYTE "Success!", 0  ; æŠ•æ³¨æˆåŠŸè¨Šæ¯
+	info2 BYTE "Error! You don't have enough token.", 0  ; æŠ•æ³¨å¤±æ•—è¨Šæ¯
 	gambling_item DWORD OFFSET pt, OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
-	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; ½ß²v(«ö·Ó¤W­±¦r¦ê¶¶§Ç)
-	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; ª±®a¤Uª`¶q(«ö·Ó¤W­±¦r¦ê¶¶§Ç)
+	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; è³ ç‡(æŒ‰ç…§ä¸Šé¢å­—ä¸²é †åº)
+	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; ç©å®¶ä¸‹æ³¨é‡(æŒ‰ç…§ä¸Šé¢å­—ä¸²é †åº)
 	pos DWORD 0
 	money DWORD 0
-	tmp_pos DWORD 0 ; ¥æ´«¼Æ­È¥Îªº
-	select_index DWORD 0 ;¿ï­ş­Ó
+	tmp_pos DWORD 0 ; äº¤æ›æ•¸å€¼ç”¨çš„
+	select_index DWORD 0 ;é¸å“ªå€‹
 	letter_Bet byte "Enter Bet amount here!!", 0AH,0DH,0
 	letter_Leave byte "Enter BackSpace to leave or space to bet!!", 0AH,0DH,0
-	Beting dword 0; ¤Uª`ª÷ÃB
-	;--- µ²§ô ---
+	Beting dword 0; ä¸‹æ³¨é‡‘é¡
+	;--- çµæŸ ---
 
 .code ;
 
@@ -177,7 +178,7 @@ Interface PROC
 ;-----------------------------------------
 	push ecx
 
-;²Ä¤@±Æ¤ôªG°Ï
+;ç¬¬ä¸€æ’æ°´æœå€
 
 	call horizon_edge
 	mov count, 0
@@ -220,13 +221,13 @@ line1:
     jne line1
 
 next_line2:
-;²Ä¤G±Æ¤ôªG+ªÅ®æ
+;ç¬¬äºŒæ’æ°´æœ+ç©ºæ ¼
 	mov cnt, 0		;mario_1
 	mov count, 0
 	mov ecx, 9
 line2:
 	call vertical_edge
-	mov esi, OFFSET watermelon
+	mov esi, OFFSET banana
 	mov eax, 19
 	call paint_block
 	push ecx
@@ -251,7 +252,7 @@ line2:
 	add count, 4
 	loop line2
 
-;²Ä¤T±Æ¤ôªG+ªÅ®æ
+;ç¬¬ä¸‰æ’æ°´æœ+ç©ºæ ¼
 	mov cnt, 0    ;mario_2
 	mov count, 0
 	mov ecx, 9
@@ -281,7 +282,7 @@ line3:
 	add count, 4
 	loop line3
 
-;²Ä¥|±Æ¤ôªG+ªÅ®æ
+;ç¬¬å››æ’æ°´æœ+ç©ºæ ¼
 	mov cnt, 0		;mario_3
 	mov count, 0
 	mov ecx, 8
@@ -303,7 +304,7 @@ line4:
 	pop ecx
 
 	call vertical_edge
-	mov esi, OFFSET apple
+	mov esi, OFFSET again
 	mov eax, 9
 	call paint_block
 
@@ -312,7 +313,7 @@ line4:
 	loop line4
 	
 	call horizon_edge
-;²Ä¤­¦æ¤ôªG
+;ç¬¬äº”è¡Œæ°´æœ
 	mov count, 0
 	mov ecx, 9
 line5:
@@ -427,7 +428,7 @@ play PROC
 rotate:
 	mov dl,0
 	mov dh,0
-	call gotoxy ;¨ê·s¿Ã¹õµe­±
+	call gotoxy ;åˆ·æ–°è¢å¹•ç•«é¢
 
 	.IF now_block <= 0
 		add now_block, 19
@@ -435,7 +436,7 @@ rotate:
 		dec now_block
 	.ENDIF
 
-	call Interface		;µe¤¶­±
+	call Interface		;ç•«ä»‹é¢
 	
 	.IF ecx <= 5
 		push ecx
@@ -452,56 +453,56 @@ play ENDP
 
 ;-----------------------------------------
 bet PROC USES eax ecx edx esi
-; INFO: ª±®a¤Uª`function
-; REQUIRE: pos(¦ì¸m 0,4,8,...,24), money(ª÷ÃB)
+; INFO: ç©å®¶ä¸‹æ³¨function
+; REQUIRE: pos(ä½ç½® 0,4,8,...,24), money(é‡‘é¡)
 ; RETURN: (none)
 ;-----------------------------------------
 	mov esi, pos
 	mov ecx, player_token
 	add ecx, gambling_token[esi]
-	mov eax, money  ; ªşµù¡Geaxªº­È¦b¦¹¨ç¦¡¥şµ{³£·|¬°"±ı§ëª`¥N¹ô"
+	mov eax, money  ; é™„è¨»ï¼šeaxçš„å€¼åœ¨æ­¤å‡½å¼å…¨ç¨‹éƒ½æœƒç‚º"æ¬²æŠ•æ³¨ä»£å¹£"
 
-	.IF ecx >= eax  ; ¦pªGª±®a¥N¹ô + ¤w§ëª`¥N¹ô >= ±ı§ëª`¥N¹ô
+	.IF ecx >= eax  ; å¦‚æœç©å®¶ä»£å¹£ + å·²æŠ•æ³¨ä»£å¹£ >= æ¬²æŠ•æ³¨ä»£å¹£
 		mov ecx, gambling_token[esi]
-		.IF ecx >= eax  ; ¦pªGª±®a§ëª`ÅÜ¤Ö©Î¤£ÅÜ(¤w§ëª`¥N¹ô >= ±ı§ëª`¥N¹ô)
-			sub ecx, eax  ; ­pºâ¥X®tÃB
-			add ecx, player_token  ; §â¿ú¥[¦^µ¹ª±®a
+		.IF ecx >= eax  ; å¦‚æœç©å®¶æŠ•æ³¨è®Šå°‘æˆ–ä¸è®Š(å·²æŠ•æ³¨ä»£å¹£ >= æ¬²æŠ•æ³¨ä»£å¹£)
+			sub ecx, eax  ; è¨ˆç®—å‡ºå·®é¡
+			add ecx, player_token  ; æŠŠéŒ¢åŠ å›çµ¦ç©å®¶
 			mov player_token, ecx
 		.ELSE
-			sub ecx, eax  ; ­pºâ¥X®tÃB
-			add player_token, ecx  ; ¥[¦©®tÃB
+			sub ecx, eax  ; è¨ˆç®—å‡ºå·®é¡
+			add player_token, ecx  ; åŠ æ‰£å·®é¡
 		.ENDIF
 
 		mov gambling_token[esi], eax
 		mov edx, OFFSET info1
 		call WriteString
 		call crlf
-	.ELSE  ; §ëª`¤£¦¨¥ß
+	.ELSE  ; æŠ•æ³¨ä¸æˆç«‹
 		mov edx, OFFSET info2
 		call WriteString
 		call crlf
 	.ENDIF
 
-	mov tmp_pos, 0 ; ¦r¦ê¦ì§}¥ı¦s¨ìtmp_pos
-	mov esi, OFFSET gambling_item ; token ¦ì§}
+	mov tmp_pos, 0 ; å­—ä¸²ä½å€å…ˆå­˜åˆ°tmp_pos
+	mov esi, OFFSET gambling_item ; token ä½å€
 	mov edx, [esi]
-	call WriteString  ; ¦L¥Xª±®atoken¦r¦ê
+	call WriteString  ; å°å‡ºç©å®¶tokenå­—ä¸²
 	add esi, 4
 	mov eax, player_token
-	call WriteInt  ; ¦L¥Xª±®atoken¼Æ¶q
+	call WriteInt  ; å°å‡ºç©å®¶tokenæ•¸é‡
 	call crlf
 	mov ecx, 7
 	L1:
 		mov edx, [esi]
 		call WriteString
 		add esi, 4
-		push esi ; ¼È¦s
+		push esi ; æš«å­˜
 
 		mov esi, tmp_pos
 		mov eax, gambling_token[esi]
 		call WriteInt
 		add esi, 4
-		mov tmp_pos, esi ; ¦s¦^¥h
+		mov tmp_pos, esi ; å­˜å›å»
 		pop esi
 		call Crlf
 	loop L1
@@ -510,8 +511,8 @@ bet ENDP
 
 ;-----------------------------------------
 result PROC
-; INFO: ª±®a¤Uª`function
-; REQUIRE: pos(¦ì¸m 0,4,8,...,24)
+; INFO: ç©å®¶ä¸‹æ³¨function
+; REQUIRE: pos(ä½ç½® 0,4,8,...,24)
 ; RETURN: (none)
 ;-----------------------------------------
 	ret
@@ -520,7 +521,7 @@ result ENDP
 
 ;-----------------------------------------
 KeyIn Proc
-;¿é¤J¤è¦VÁä
+;è¼¸å…¥æ–¹å‘éµ
 ;-----------------------------------------
 push eax
 
@@ -574,7 +575,7 @@ left:
 	.ENDIF
 	mov eax, 1
 	;call WriteHex
-	call gotoxy				;¿Ã¹õ²MªÅ
+	call gotoxy				;è¢å¹•æ¸…ç©º
 	 mov ecx, 8
 nline1:
 	 call Crlf
@@ -599,7 +600,7 @@ right:
 	call crlf
 	
 	call crlf
-	call gotoxy				;¿Ã¹õ²MªÅ
+	call gotoxy				;è¢å¹•æ¸…ç©º
 	 mov ecx, 8
 nline2:
 	 call Crlf
@@ -637,7 +638,7 @@ KeyIn ENDP
 
 ;-----------------------------------------
 select_phase_print Proc
-;¿ï¾Ü­n§ë±ş¤p
+;é¸æ“‡è¦æŠ•æ®ºå°
 ;-----------------------------------------
 
  
@@ -682,7 +683,7 @@ select_phase_print ENDP
 
 ;-----------------------------------------
 Bet_phase_print Proc
-;¿ï¾Ü­n§ë¦h¤Ö
+;é¸æ“‡è¦æŠ•å¤šå°‘
 ;-----------------------------------------
 	PUSHFD
 	push ecx
@@ -703,9 +704,9 @@ loop L1
 	mov eax,select_index
 	mov ebx,4
 	mul ebx
-	mov pos, eax  ; ¼ÒÀÀà±­×¶Ç­È¶i¨Ó(4: ¶Ç¤J°}¦C²Ä2­Ó¦ì¸m)
+	mov pos, eax  ; æ¨¡æ“¬éˆºä¿®å‚³å€¼é€²ä¾†(4: å‚³å…¥é™£åˆ—ç¬¬2å€‹ä½ç½®)
 	mov eax, Beting
-	mov money, eax  ; ¼ÒÀÀà±­×¶Ç­È¶i¨Ó
+	mov money, eax  ; æ¨¡æ“¬éˆºä¿®å‚³å€¼é€²ä¾†
 	call bet
 	call waitmsg
 	POPFD
@@ -723,12 +724,12 @@ main PROC
 	call Randomize
 	mov eax, 20
 	call RandomRange
-	add eax, 10				;Á`¦@­nÂà´X®æ
+	add eax, 10				;ç¸½å…±è¦è½‰å¹¾æ ¼
 	mov random_num, eax
 	mov eax, 19
 	call RandomRange
 	inc eax
-	mov now_block, eax		;²{¦bÂà¨ìªº¦ì¸m
+	mov now_block, eax		;ç¾åœ¨è½‰åˆ°çš„ä½ç½®
 
 	call play
 

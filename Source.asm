@@ -1,4 +1,8 @@
-INCLUDE Irvine32.inc
+INCLUDE irvine32.inc
+INCLUDE macros.inc
+INCLUDELIB winmm.lib
+
+PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 
 .data
 	watermelon1 BYTE "      :i::::.      ", 0
@@ -143,12 +147,12 @@ INCLUDE Irvine32.inc
 
 	cnt DWORD 0
 	count DWORD 0
-	random_num DWORD 0; ç¸½å…±è·‘å¹¾æ¬¡
+	random_num DWORD 0; Á`¦@¶]´X¦¸
 	now_block DWORD 20	
 	time_interval DWORD 0
 
-	; INFO: æœ¬å€ç‚ºä¸‹æ³¨é‚è¼¯æ‰€è¦ç”¨åˆ°çš„è®Šæ•¸(written by PR)
-	player_token DWORD 100 ; ç©å®¶ä»£å¹£æ•¸é‡(åˆå§‹ç‚º100)
+	; INFO: ¥»°Ï¬°¤Uª`ÅŞ¿è©Ò­n¥Î¨ìªºÅÜ¼Æ(written by PR)
+	player_token DWORD 100 ; ª±®a¥N¹ô¼Æ¶q(ªì©l¬°100)
 	pt  BYTE "YOUR TOKENS:     ", 0
 	gi1 BYTE "watermelon (x2)  ", 0
 	gi2 BYTE "banana (x2)      ", 0
@@ -157,19 +161,24 @@ INCLUDE Irvine32.inc
 	gi5 BYTE "bell (x6)        ", 0
 	gi6 BYTE "diamond (x8)     ", 0
 	gi7 BYTE "double7 (x10)    ", 0
-	info1 BYTE "Success!", 0  ; æŠ•æ³¨æˆåŠŸè¨Šæ¯
-	info2 BYTE "Error! You don't have enough token.", 0  ; æŠ•æ³¨å¤±æ•—è¨Šæ¯
+	info1 BYTE "Success!", 0  ; §ëª`¦¨¥\°T®§
+	info2 BYTE "Error! You don't have enough token.", 0  ; §ëª`¥¢±Ñ°T®§
 	gambling_item DWORD OFFSET pt, OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
-	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; è³ ç‡(æŒ‰ç…§ä¸Šé¢å­—ä¸²é †åº)
-	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; ç©å®¶ä¸‹æ³¨é‡(æŒ‰ç…§ä¸Šé¢å­—ä¸²é †åº)
+	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; ½ß²v(«ö·Ó¤W­±¦r¦ê¶¶§Ç)
+	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; ª±®a¤Uª`¶q(«ö·Ó¤W­±¦r¦ê¶¶§Ç)
 	pos DWORD 0
 	money DWORD 0
-	tmp_pos DWORD 0 ; äº¤æ›æ•¸å€¼ç”¨çš„
-	select_index DWORD 0 ;é¸å“ªå€‹
+	tmp_pos DWORD 0 ; ¥æ´«¼Æ­È¥Îªº
+	select_index DWORD 0 ;¿ï­ş­Ó
 	letter_Bet byte "Enter Bet amount here!!", 0AH,0DH,0
 	letter_Leave byte "Enter BackSpace to leave or space to bet!!", 0AH,0DH,0
-	Beting dword 0; ä¸‹æ³¨é‡‘é¡
-	;--- çµæŸ ---
+	Beting dword 0; ¤Uª`ª÷ÃB
+
+	bet_music BYTE "bet.wav", 0
+	slot_music BYTE "slot.wav", 0
+	jackpot_music BYTE "jackpot.wav", 0
+
+	;--- µ²§ô ---
 
 .code ;
 
@@ -178,7 +187,7 @@ Interface PROC
 ;-----------------------------------------
 	push ecx
 
-;ç¬¬ä¸€æ’æ°´æœå€
+;²Ä¤@±Æ¤ôªG°Ï
 
 	call horizon_edge
 	mov count, 0
@@ -221,7 +230,7 @@ line1:
     jne line1
 
 next_line2:
-;ç¬¬äºŒæ’æ°´æœ+ç©ºæ ¼
+;²Ä¤G±Æ¤ôªG+ªÅ®æ
 	mov cnt, 0		;mario_1
 	mov count, 0
 	mov ecx, 9
@@ -252,7 +261,7 @@ line2:
 	add count, 4
 	loop line2
 
-;ç¬¬ä¸‰æ’æ°´æœ+ç©ºæ ¼
+;²Ä¤T±Æ¤ôªG+ªÅ®æ
 	mov cnt, 0    ;mario_2
 	mov count, 0
 	mov ecx, 9
@@ -282,7 +291,7 @@ line3:
 	add count, 4
 	loop line3
 
-;ç¬¬å››æ’æ°´æœ+ç©ºæ ¼
+;²Ä¥|±Æ¤ôªG+ªÅ®æ
 	mov cnt, 0		;mario_3
 	mov count, 0
 	mov ecx, 8
@@ -313,7 +322,7 @@ line4:
 	loop line4
 	
 	call horizon_edge
-;ç¬¬äº”è¡Œæ°´æœ
+;²Ä¤­¦æ¤ôªG
 	mov count, 0
 	mov ecx, 9
 line5:
@@ -426,22 +435,24 @@ play PROC
 ;-----------------------------------------
 	push eax
 	push ecx
+
 	mov time_interval, 100
 	call Randomize
-	mov eax, 50
+	mov eax, 10
 	call RandomRange
-	add eax, 20				;ç¸½å…±è¦è½‰å¹¾æ ¼
-	mov random_num, 10
+	add eax, 20				;Á`¦@­nÂà´X®æ
+	mov random_num, eax
+
 	mov eax, 19
 	call RandomRange
 	inc eax
-	mov now_block, eax		;ç¾åœ¨è½‰åˆ°çš„ä½ç½®
+	mov now_block, eax		;²{¦bÂà¨ìªº¦ì¸m
 	mov ecx, random_num
 	
 rotate:
 	mov dl,0
 	mov dh,0
-	call gotoxy ;åˆ·æ–°è¢å¹•ç•«é¢
+	call gotoxy ;¨ê·s¿Ã¹õµe­±
 
 	.IF now_block <= 0
 		add now_block, 19
@@ -449,8 +460,13 @@ rotate:
 		dec now_block
 	.ENDIF
 
-	call Interface		;ç•«ä»‹é¢
-	
+	call Interface		;µe¤¶­±
+
+	push ecx
+	INVOKE PlaySound, NULL, NULL, 20001h      ;¼È°±¤W¤@­º­µ¼Ö
+	INVOKE PlaySound, OFFSET slot_music, NULL, 20001h                ;¼½©ñ­µ¼Ö
+	pop ecx
+
 	.IF ecx <= 5
 		push ecx
 		add time_interval, 200
@@ -466,9 +482,13 @@ rotate:
 	pop ecx
 	loop rotate
 
+	push ecx
+	INVOKE PlaySound, NULL, NULL, 20001h      ;¼È°±­µ¼Ö
+	INVOKE PlaySound, OFFSET jackpot_music, NULL, 20001h                ;¼½©ñ­µ¼Ö
+	pop ecx
 
 	.IF now_block == 9
-	call play
+		call play
 	.ENDIF
 	pop ecx
 	pop eax
@@ -477,56 +497,56 @@ play ENDP
 
 ;-----------------------------------------
 bet PROC USES eax ecx edx esi
-; INFO: ç©å®¶ä¸‹æ³¨function
-; REQUIRE: pos(ä½ç½® 0,4,8,...,24), money(é‡‘é¡)
+; INFO: ª±®a¤Uª`function
+; REQUIRE: pos(¦ì¸m 0,4,8,...,24), money(ª÷ÃB)
 ; RETURN: (none)
 ;-----------------------------------------
 	mov esi, pos
 	mov ecx, player_token
 	add ecx, gambling_token[esi]
-	mov eax, money  ; é™„è¨»ï¼šeaxçš„å€¼åœ¨æ­¤å‡½å¼å…¨ç¨‹éƒ½æœƒç‚º"æ¬²æŠ•æ³¨ä»£å¹£"
+	mov eax, money  ; ªşµù¡Geaxªº­È¦b¦¹¨ç¦¡¥şµ{³£·|¬°"±ı§ëª`¥N¹ô"
 
-	.IF ecx >= eax  ; å¦‚æœç©å®¶ä»£å¹£ + å·²æŠ•æ³¨ä»£å¹£ >= æ¬²æŠ•æ³¨ä»£å¹£
+	.IF ecx >= eax  ; ¦pªGª±®a¥N¹ô + ¤w§ëª`¥N¹ô >= ±ı§ëª`¥N¹ô
 		mov ecx, gambling_token[esi]
-		.IF ecx >= eax  ; å¦‚æœç©å®¶æŠ•æ³¨è®Šå°‘æˆ–ä¸è®Š(å·²æŠ•æ³¨ä»£å¹£ >= æ¬²æŠ•æ³¨ä»£å¹£)
-			sub ecx, eax  ; è¨ˆç®—å‡ºå·®é¡
-			add ecx, player_token  ; æŠŠéŒ¢åŠ å›çµ¦ç©å®¶
+		.IF ecx >= eax  ; ¦pªGª±®a§ëª`ÅÜ¤Ö©Î¤£ÅÜ(¤w§ëª`¥N¹ô >= ±ı§ëª`¥N¹ô)
+			sub ecx, eax  ; ­pºâ¥X®tÃB
+			add ecx, player_token  ; §â¿ú¥[¦^µ¹ª±®a
 			mov player_token, ecx
 		.ELSE
-			sub ecx, eax  ; è¨ˆç®—å‡ºå·®é¡
-			add player_token, ecx  ; åŠ æ‰£å·®é¡
+			sub ecx, eax  ; ­pºâ¥X®tÃB
+			add player_token, ecx  ; ¥[¦©®tÃB
 		.ENDIF
 
 		mov gambling_token[esi], eax
 		mov edx, OFFSET info1
 		call WriteString
 		call crlf
-	.ELSE  ; æŠ•æ³¨ä¸æˆç«‹
+	.ELSE  ; §ëª`¤£¦¨¥ß
 		mov edx, OFFSET info2
 		call WriteString
 		call crlf
 	.ENDIF
 
-	mov tmp_pos, 0 ; å­—ä¸²ä½å€å…ˆå­˜åˆ°tmp_pos
-	mov esi, OFFSET gambling_item ; token ä½å€
+	mov tmp_pos, 0 ; ¦r¦ê¦ì§}¥ı¦s¨ìtmp_pos
+	mov esi, OFFSET gambling_item ; token ¦ì§}
 	mov edx, [esi]
-	call WriteString  ; å°å‡ºç©å®¶tokenå­—ä¸²
+	call WriteString  ; ¦L¥Xª±®atoken¦r¦ê
 	add esi, 4
 	mov eax, player_token
-	call WriteInt  ; å°å‡ºç©å®¶tokenæ•¸é‡
+	call WriteInt  ; ¦L¥Xª±®atoken¼Æ¶q
 	call crlf
 	mov ecx, 7
 	L1:
 		mov edx, [esi]
 		call WriteString
 		add esi, 4
-		push esi ; æš«å­˜
+		push esi ; ¼È¦s
 
 		mov esi, tmp_pos
 		mov eax, gambling_token[esi]
 		call WriteInt
 		add esi, 4
-		mov tmp_pos, esi ; å­˜å›å»
+		mov tmp_pos, esi ; ¦s¦^¥h
 		pop esi
 		call Crlf
 	loop L1
@@ -535,8 +555,8 @@ bet ENDP
 
 ;-----------------------------------------
 result PROC
-; INFO: ç©å®¶ä¸‹æ³¨function
-; REQUIRE: pos(ä½ç½® 0,4,8,...,24)
+; INFO: ª±®a¤Uª`function
+; REQUIRE: pos(¦ì¸m 0,4,8,...,24)
 ; RETURN: (none)
 ;-----------------------------------------
 	ret
@@ -545,7 +565,7 @@ result ENDP
 
 ;-----------------------------------------
 KeyIn Proc
-;è¼¸å…¥æ–¹å‘éµ
+;¿é¤J¤è¦VÁä
 ;-----------------------------------------
 push eax
 
@@ -599,7 +619,7 @@ left:
 	.ENDIF
 	mov eax, 1
 	;call WriteHex
-	call gotoxy				;è¢å¹•æ¸…ç©º
+	call gotoxy				;¿Ã¹õ²MªÅ
 	 mov ecx, 8
 nline1:
 	 call Crlf
@@ -624,7 +644,7 @@ right:
 	call crlf
 	
 	call crlf
-	call gotoxy				;è¢å¹•æ¸…ç©º
+	call gotoxy				;¿Ã¹õ²MªÅ
 	 mov ecx, 8
 nline2:
 	 call Crlf
@@ -662,7 +682,7 @@ KeyIn ENDP
 
 ;-----------------------------------------
 select_phase_print Proc
-;é¸æ“‡è¦æŠ•æ®ºå°
+;¿ï¾Ü­n§ë±ş¤p
 ;-----------------------------------------
 
  
@@ -707,7 +727,7 @@ select_phase_print ENDP
 
 ;-----------------------------------------
 Bet_phase_print Proc
-;é¸æ“‡è¦æŠ•å¤šå°‘
+;¿ï¾Ü­n§ë¦h¤Ö
 ;-----------------------------------------
 	PUSHFD
 	push ecx
@@ -728,9 +748,9 @@ loop L1
 	mov eax,select_index
 	mov ebx,4
 	mul ebx
-	mov pos, eax  ; æ¨¡æ“¬éˆºä¿®å‚³å€¼é€²ä¾†(4: å‚³å…¥é™£åˆ—ç¬¬2å€‹ä½ç½®)
+	mov pos, eax  ; ¼ÒÀÀà±­×¶Ç­È¶i¨Ó(4: ¶Ç¤J°}¦C²Ä2­Ó¦ì¸m)
 	mov eax, Beting
-	mov money, eax  ; æ¨¡æ“¬éˆºä¿®å‚³å€¼é€²ä¾†
+	mov money, eax  ; ¼ÒÀÀà±­×¶Ç­È¶i¨Ó
 	call bet
 	call waitmsg
 	POPFD
@@ -738,17 +758,20 @@ ret
 Bet_phase_print ENDP
 ;-------------------------------------------
 main PROC
-	
+
+	INVOKE PlaySound, NULL, NULL, 20001h      ;¼È°±¤W¤@­º­µ¼Ö
+	INVOKE PlaySound, OFFSET bet_music, NULL, 20009h                ;¼½©ñ­µ¼Ö
+
 	call KeyIn
 
 	call SetConsoleVibilityFalse
 
 	call play
 
-
-
-
 	call waitmsg
+	call waitmsg
+
 	Invoke ExitProcess, 0
+
 main ENDP
 end main

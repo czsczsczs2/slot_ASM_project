@@ -424,7 +424,20 @@ paint_select ENDP
 ;-----------------------------------------
 play PROC
 ;-----------------------------------------
+	push eax
+	push ecx
+	mov time_interval, 100
+	call Randomize
+	mov eax, 50
+	call RandomRange
+	add eax, 20				;總共要轉幾格
+	mov random_num, 10
+	mov eax, 19
+	call RandomRange
+	inc eax
+	mov now_block, eax		;現在轉到的位置
 	mov ecx, random_num
+	
 rotate:
 	mov dl,0
 	mov dh,0
@@ -443,11 +456,22 @@ rotate:
 		add time_interval, 200
 		Invoke sleep, time_interval
 		pop ecx
+	.ELSE 
+		push ecx
+		Invoke sleep, time_interval
+		pop ecx
 	.ENDIF
 	push ecx
 	call SetConsoleVibilityFalse
 	pop ecx
 	loop rotate
+
+
+	.IF now_block == 9
+	call play
+	.ENDIF
+	pop ecx
+	pop eax
 	ret
 play ENDP
 
@@ -715,23 +739,14 @@ Bet_phase_print ENDP
 ;-------------------------------------------
 main PROC
 	
-
 	call KeyIn
-	;call Bet_phase_print
 
 	call SetConsoleVibilityFalse
 
-	call Randomize
-	mov eax, 20
-	call RandomRange
-	add eax, 10				;總共要轉幾格
-	mov random_num, eax
-	mov eax, 19
-	call RandomRange
-	inc eax
-	mov now_block, eax		;現在轉到的位置
-
 	call play
+
+
+
 
 	call waitmsg
 	Invoke ExitProcess, 0

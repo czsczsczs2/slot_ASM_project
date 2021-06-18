@@ -131,6 +131,28 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 	mario24 BYTE "                        :1qJII5I525III525IX5XSKXqKPPDPQP     .           .. :                      ",0
 	mario25 BYTE "                           P121U1U121U12UI2IU52S5XqqqdPBd                     .                    ",0
 
+	you_lose1 BYTE "                                                                 ", 0
+	you_lose2 BYTE "    ████        ████       ███████████        ████        ████    ", 0
+	you_lose3 BYTE "    ████        ████     ███████████████     ████          ████   ", 0
+	you_lose4 BYTE "     ████      ████     ████         ████   ████            ████  ", 0
+	you_lose5 BYTE "      ████    ████      ████         ████   ████            ████  ", 0
+	you_lose6 BYTE "        ████████        ████         ████    ████          ████   ", 0
+	you_lose7 BYTE "          ████          ████         ████     ████        ████    ", 0
+	you_lose8 BYTE "          ████          ████         ████      ████      ████     ", 0
+	you_lose9 BYTE "          ████           ███████████████        ████████████      ", 0
+	you_lose10 BYTE "          ████             ███████████           ██████████       ", 0
+
+	you_lose11 BYTE "                                                                 ", 0
+	you_lose12 BYTE "  ████             ███████████        ██████████     ████████████", 0
+	you_lose13 BYTE "  ████           ███████████████    ██████████████   ████████████", 0
+	you_lose14 BYTE "  ████          ████         ████   ████             ████        ", 0
+	you_lose15 BYTE "  ████          ████         ████     ██████         ████     █  ", 0
+	you_lose16 BYTE "  ████          ████         ████       ██████       ██████████  ", 0
+	you_lose17 BYTE "  ████          ████         ████         ██████     ████     █  ", 0
+	you_lose18 BYTE "  ████          ████         ████             ████   ████        ", 0
+	you_lose19 BYTE "  ████████████   ███████████████    ██████████████   ████████████", 0
+	you_lose20 BYTE "  ████████████     ███████████        ██████████     ████████████", 0
+
 	watermelon DWORD OFFSET watermelon1, OFFSET watermelon2, OFFSET watermelon3, OFFSET watermelon4, OFFSET watermelon5, OFFSET watermelon6, OFFSET watermelon7, OFFSET watermelon8, OFFSET watermelon9
 	bell	   DWORD OFFSET bell1, OFFSET bell2, OFFSET bell3, OFFSET bell4, OFFSET bell5, OFFSET bell6, OFFSET bell7, OFFSET bell8, OFFSET bell9
 	WTF		   DWORD OFFSET WTF1, OFFSET WTF2, OFFSET WTF3, OFFSET WTF4, OFFSET WTF5, OFFSET WTF6, OFFSET WTF7, OFFSET WTF8, OFFSET WTF9
@@ -144,6 +166,10 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 	mario_2	   DWORD OFFSET mario9,OFFSET mario10, OFFSET mario11,OFFSET mario12,OFFSET mario13,OFFSET mario14,OFFSET mario15,OFFSET mario16;
 	mario_3    DWORD OFFSET mario17,OFFSET mario18,OFFSET mario19,OFFSET mario20, OFFSET mario21,OFFSET mario22,OFFSET mario23,OFFSET mario24,OFFSET mario25;
 	again DWORD OFFSET again1, OFFSET again2, OFFSET again3, OFFSET again4, OFFSET again5, OFFSET again6, OFFSET again7, OFFSET again8, OFFSET again9
+	
+	;you_lose DWORD OFFSET you_lose1,OFFSET you_lose2, OFFSET you_lose3, OFFSET you_lose4, OFFSET you_lose5, OFFSET you_lose6, OFFSET you_lose7, OFFSET you_lose8 , OFFSET you_lose9, OFFSET you_lose10, OFFSET you_lose11, OFFSET you_lose12, OFFSET you_lose13, OFFSET you_lose14,OFFSET  you_lose15, OFFSET you_lose16, OFFSET you_lose17, OFFSET you_lose18, OFFSET you_lose19, OFFSET you_lose20;
+	you_lose_1 DWORD OFFSET you_lose1,OFFSET you_lose2, OFFSET you_lose3, OFFSET you_lose4, OFFSET you_lose5, OFFSET you_lose6, OFFSET you_lose7, OFFSET you_lose8 , OFFSET you_lose9, OFFSET you_lose10;
+	you_lose_2 DWORD OFFSET you_lose11, OFFSET you_lose12, OFFSET you_lose13, OFFSET you_lose14,OFFSET  you_lose15, OFFSET you_lose16, OFFSET you_lose17, OFFSET you_lose18, OFFSET you_lose19, OFFSET you_lose20;
 
 	cnt DWORD 0
 	count DWORD 0
@@ -166,6 +192,7 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 	gambling_item DWORD OFFSET pt, OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
 	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; 賠率(按照上面字串順序)
 	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; 玩家下注量(按照上面字串順序)
+	result_pos DWORD 0
 	pos DWORD 0
 	money DWORD 0
 	tmp_pos DWORD 0 ; 交換數值用的
@@ -559,6 +586,76 @@ result PROC
 ; REQUIRE: pos(位置 0,4,8,...,24)
 ; RETURN: (none)
 ;-----------------------------------------
+
+	.IF (now_block == 0)
+		mov result_pos, 0
+	.ENDIF
+	.IF (now_block == 6)
+		mov result_pos, 0
+	.ENDIF
+	.IF (now_block == 10)
+		mov result_pos, 0
+	.ENDIF
+	.IF (now_block == 16)
+		mov result_pos, 0
+	.ENDIF
+	.IF (now_block == 3)
+		mov result_pos, 4
+	.ENDIF
+	.IF (now_block == 5)
+		mov result_pos, 4
+	.ENDIF
+	.IF (now_block == 12)
+		mov result_pos, 4
+	.ENDIF
+	.IF (now_block == 19)
+		mov result_pos, 4
+	.ENDIF
+	.IF (now_block == 7)
+		mov result_pos, 8
+	.ENDIF
+	.IF (now_block == 17)
+		mov result_pos, 8
+	.ENDIF
+	.IF (now_block == 18)
+		mov result_pos, 8
+	.ENDIF
+	.IF (now_block == 4)
+		mov result_pos, 12
+	.ENDIF
+	.IF (now_block == 8)
+		mov result_pos, 12
+	.ENDIF
+	.IF (now_block == 14)
+		mov result_pos, 12
+	.ENDIF
+	.IF (now_block == 1)
+		mov result_pos, 16
+	.ENDIF
+	.IF (now_block == 11)
+		mov result_pos, 16
+	.ENDIF
+	.IF (now_block == 2)
+		mov result_pos, 20
+	.ENDIF
+	.IF (now_block == 15)
+		mov result_pos, 20
+	.ENDIF
+	.IF now_block == 13
+		mov result_pos, 24
+	.ENDIF
+
+	mov esi, result_pos
+	mov eax, gambling_odds[esi]
+	mov ebx, gambling_token[esi]
+	mul ebx
+	add player_token, eax
+	mov esi, 0
+	mov ecx, 7
+l1:
+	mov gambling_token[esi], 0
+	add esi, 4
+	loop l1
 	ret
 result ENDP
 
@@ -760,6 +857,7 @@ Bet_phase_print ENDP
 ;-------------------------------------------
 main PROC
 
+
 	INVOKE PlaySound, NULL, NULL, 20001h      ;暫停上一首音樂
 	INVOKE PlaySound, OFFSET bet_music, NULL, 20009h                ;播放音樂
 
@@ -769,9 +867,37 @@ main PROC
 
 	call play
 
+	;mov eax, player_token
+	;call writeint
+
+	call result
+
+	;mov eax, player_token
+	;call writeint
 
 
-	call waitmsg
+	.IF (player_token == 0)
+		call clrscr
+		mov esi, OFFSET you_lose_1
+		mov ecx, 10
+		temp1:
+			mov edx, [esi]
+			call writestring
+			call crlf
+			add esi, 4
+		loop temp1
+		
+		mov esi, OFFSET you_lose_2
+		mov ecx, 10
+		temp2:
+			mov edx, [esi]
+			call writestring
+			call crlf
+			add esi, 4
+		loop temp2
+	.ENDIF
+
+finish: 
 	mov eax, 0		;字變黑 為了美觀
 	call setTextColor
 	Invoke ExitProcess, 0

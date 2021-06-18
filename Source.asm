@@ -200,6 +200,7 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 	letter_Bet byte "Enter Bet amount here!!", 0AH,0DH,0
 	letter_Leave byte "Enter BackSpace to leave or space to bet!!", 0AH,0DH,0
 	Beting dword 0; 下注金額
+	round BYTE "Through this round, The money you have has left :  ", 0
 
 	bet_music BYTE "bet.wav", 0
 	slot_music BYTE "slot.wav", 0
@@ -665,7 +666,7 @@ KeyIn Proc
 ;輸入方向鍵
 ;-----------------------------------------
 push eax
-
+push ecx
 head:
 	call clrscr
 	mov select_index,0
@@ -773,7 +774,9 @@ space:
 
 back:
 	call clrscr
+	pop ecx
 	pop eax
+	
 	ret
 KeyIn ENDP
 ;-----------------------------------------
@@ -782,11 +785,12 @@ KeyIn ENDP
 select_phase_print Proc
 ;選擇要投殺小
 ;-----------------------------------------
-
+	push eax
+	push ecx
  
- call Crlf
- call vertical_edge;
- mov esi, OFFSET watermelon
+	call Crlf
+	call vertical_edge;
+	mov esi, OFFSET watermelon
 	mov eax, 0
 	call paint_select
 
@@ -815,14 +819,12 @@ select_phase_print Proc
 	mov eax, 6
 	call paint_select
 
-    
-
-    
 	add count,4
+
+	pop ecx
+	pop eax
 	ret
 select_phase_print ENDP
-
-
 ;-----------------------------------------
 Bet_phase_print Proc
 ;選擇要投多少
@@ -855,9 +857,46 @@ loop L1
 ret
 Bet_phase_print ENDP
 ;-------------------------------------------
+;-------------------------------------------
+End_game PROC
+	call clrscr
+	push eax
+	push ecx
+	.IF (player_token == 0)
+		mov esi, OFFSET you_lose_1
+		mov ecx, 10
+		temp1:
+			mov edx, [esi]
+			call writestring
+			call crlf
+			add esi, 4
+		loop temp1
+		mov esi, OFFSET you_lose_2
+		mov ecx, 10
+		temp2:
+			mov edx, [esi]
+			call writestring
+			call crlf
+			add esi, 4
+		loop temp2
+	.ELSE
+		mov edx, OFFSET round
+		call writestring
+		mov eax, player_token
+		call writeint
+	.ENDIF
+	pop ecx
+	pop eax
+	
+	ret
+End_game ENDP
+;-------------------------------------------
 main PROC
 
-
+start:
+	.IF (player_token == 0)
+		jmp finish
+	.ENDIF
 	INVOKE PlaySound, NULL, NULL, 20001h      ;暫停上一首音樂
 	INVOKE PlaySound, OFFSET bet_music, NULL, 20009h                ;播放音樂
 
@@ -867,37 +906,14 @@ main PROC
 
 	call play
 
-	;mov eax, player_token
-	;call writeint
-
 	call result
 
-	;mov eax, player_token
-	;call writeint
+	call End_game
+	
+	
+loop start
 
-
-	.IF (player_token == 0)
-		call clrscr
-		mov esi, OFFSET you_lose_1
-		mov ecx, 10
-		temp1:
-			mov edx, [esi]
-			call writestring
-			call crlf
-			add esi, 4
-		loop temp1
-		
-		mov esi, OFFSET you_lose_2
-		mov ecx, 10
-		temp2:
-			mov edx, [esi]
-			call writestring
-			call crlf
-			add esi, 4
-		loop temp2
-	.ENDIF
-
-finish: 
+finish:
 	mov eax, 0		;字變黑 為了美觀
 	call setTextColor
 	Invoke ExitProcess, 0

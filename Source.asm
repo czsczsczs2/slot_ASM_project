@@ -132,26 +132,26 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 	mario25 BYTE "                           P121U1U121U12UI2IU52S5XqqqdPBd                     .                    ",0
 
 	you_lose1 BYTE "                                                                 ", 0
-	you_lose2 BYTE "    ‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà       ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà    ", 0
-	you_lose3 BYTE "    ‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà   ", 0
-	you_lose4 BYTE "     ‚ñà‚ñà‚ñà‚ñà      ‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà   ‚ñà‚ñà‚ñà‚ñà            ‚ñà‚ñà‚ñà‚ñà  ", 0
-	you_lose5 BYTE "      ‚ñà‚ñà‚ñà‚ñà    ‚ñà‚ñà‚ñà‚ñà      ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà   ‚ñà‚ñà‚ñà‚ñà            ‚ñà‚ñà‚ñà‚ñà  ", 0
-	you_lose6 BYTE "        ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà    ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà   ", 0
-	you_lose7 BYTE "          ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà    ", 0
-	you_lose8 BYTE "          ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà      ‚ñà‚ñà‚ñà‚ñà      ‚ñà‚ñà‚ñà‚ñà     ", 0
-	you_lose9 BYTE "          ‚ñà‚ñà‚ñà‚ñà           ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà      ", 0
-	you_lose10 BYTE "          ‚ñà‚ñà‚ñà‚ñà             ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà           ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà       ", 0
+	you_lose2 BYTE "    ¢i¢i¢i¢i        ¢i¢i¢i¢i       ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i        ¢i¢i¢i¢i        ¢i¢i¢i¢i    ", 0
+	you_lose3 BYTE "    ¢i¢i¢i¢i        ¢i¢i¢i¢i     ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i     ¢i¢i¢i¢i          ¢i¢i¢i¢i   ", 0
+	you_lose4 BYTE "     ¢i¢i¢i¢i      ¢i¢i¢i¢i     ¢i¢i¢i¢i         ¢i¢i¢i¢i   ¢i¢i¢i¢i            ¢i¢i¢i¢i  ", 0
+	you_lose5 BYTE "      ¢i¢i¢i¢i    ¢i¢i¢i¢i      ¢i¢i¢i¢i         ¢i¢i¢i¢i   ¢i¢i¢i¢i            ¢i¢i¢i¢i  ", 0
+	you_lose6 BYTE "        ¢i¢i¢i¢i¢i¢i¢i¢i        ¢i¢i¢i¢i         ¢i¢i¢i¢i    ¢i¢i¢i¢i          ¢i¢i¢i¢i   ", 0
+	you_lose7 BYTE "          ¢i¢i¢i¢i          ¢i¢i¢i¢i         ¢i¢i¢i¢i     ¢i¢i¢i¢i        ¢i¢i¢i¢i    ", 0
+	you_lose8 BYTE "          ¢i¢i¢i¢i          ¢i¢i¢i¢i         ¢i¢i¢i¢i      ¢i¢i¢i¢i      ¢i¢i¢i¢i     ", 0
+	you_lose9 BYTE "          ¢i¢i¢i¢i           ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i        ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i      ", 0
+	you_lose10 BYTE "          ¢i¢i¢i¢i             ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i           ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i       ", 0
 
 	you_lose11 BYTE "                                                                 ", 0
-	you_lose12 BYTE "  ‚ñà‚ñà‚ñà‚ñà             ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà", 0
-	you_lose13 BYTE "  ‚ñà‚ñà‚ñà‚ñà           ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà    ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà   ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà", 0
-	you_lose14 BYTE "  ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà   ‚ñà‚ñà‚ñà‚ñà             ‚ñà‚ñà‚ñà‚ñà        ", 0
-	you_lose15 BYTE "  ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà     ‚ñà  ", 0
-	you_lose16 BYTE "  ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà       ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà       ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà  ", 0
-	you_lose17 BYTE "  ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà     ‚ñà  ", 0
-	you_lose18 BYTE "  ‚ñà‚ñà‚ñà‚ñà          ‚ñà‚ñà‚ñà‚ñà         ‚ñà‚ñà‚ñà‚ñà             ‚ñà‚ñà‚ñà‚ñà   ‚ñà‚ñà‚ñà‚ñà        ", 0
-	you_lose19 BYTE "  ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà   ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà    ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà   ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà", 0
-	you_lose20 BYTE "  ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà        ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà     ‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà‚ñà", 0
+	you_lose12 BYTE "  ¢i¢i¢i¢i             ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i        ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i     ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i", 0
+	you_lose13 BYTE "  ¢i¢i¢i¢i           ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i    ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i   ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i", 0
+	you_lose14 BYTE "  ¢i¢i¢i¢i          ¢i¢i¢i¢i         ¢i¢i¢i¢i   ¢i¢i¢i¢i             ¢i¢i¢i¢i        ", 0
+	you_lose15 BYTE "  ¢i¢i¢i¢i          ¢i¢i¢i¢i         ¢i¢i¢i¢i     ¢i¢i¢i¢i¢i¢i         ¢i¢i¢i¢i     ¢i  ", 0
+	you_lose16 BYTE "  ¢i¢i¢i¢i          ¢i¢i¢i¢i         ¢i¢i¢i¢i       ¢i¢i¢i¢i¢i¢i       ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i  ", 0
+	you_lose17 BYTE "  ¢i¢i¢i¢i          ¢i¢i¢i¢i         ¢i¢i¢i¢i         ¢i¢i¢i¢i¢i¢i     ¢i¢i¢i¢i     ¢i  ", 0
+	you_lose18 BYTE "  ¢i¢i¢i¢i          ¢i¢i¢i¢i         ¢i¢i¢i¢i             ¢i¢i¢i¢i   ¢i¢i¢i¢i        ", 0
+	you_lose19 BYTE "  ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i   ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i    ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i   ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i", 0
+	you_lose20 BYTE "  ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i     ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i        ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i     ¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i¢i", 0
 
 	watermelon DWORD OFFSET watermelon1, OFFSET watermelon2, OFFSET watermelon3, OFFSET watermelon4, OFFSET watermelon5, OFFSET watermelon6, OFFSET watermelon7, OFFSET watermelon8, OFFSET watermelon9
 	bell	   DWORD OFFSET bell1, OFFSET bell2, OFFSET bell3, OFFSET bell4, OFFSET bell5, OFFSET bell6, OFFSET bell7, OFFSET bell8, OFFSET bell9
@@ -173,12 +173,12 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 
 	cnt DWORD 0
 	count DWORD 0
-	random_num DWORD 0; Á∏ΩÂÖ±Ë∑ëÂπæÊ¨°
+	random_num DWORD 0; ¡`¶@∂]¥X¶∏
 	now_block DWORD 20	
 	time_interval DWORD 0
 
-	; INFO: Êú¨ÂçÄÁÇ∫‰∏ãÊ≥®ÈÇèËºØÊâÄË¶ÅÁî®Âà∞ÁöÑËÆäÊï∏(written by PR)
-	player_token DWORD 100 ; Áé©ÂÆ∂‰ª£Âπ£Êï∏Èáè(ÂàùÂßãÁÇ∫100)
+	; INFO: •ª∞œ¨∞§U™`≈ﬁøË©“≠n•Œ®Ï™∫≈‹º∆(written by PR)
+	player_token DWORD 100 ; ™±Æa•NπÙº∆∂q(™Ï©l¨∞100)
 	pt  BYTE "YOUR TOKENS:     ", 0
 	gi1 BYTE "watermelon (x2)  ", 0
 	gi2 BYTE "banana (x2)      ", 0
@@ -187,26 +187,26 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 	gi5 BYTE "bell (x6)        ", 0
 	gi6 BYTE "diamond (x8)     ", 0
 	gi7 BYTE "double7 (x10)    ", 0
-	info1 BYTE "Success!", 0  ; ÊäïÊ≥®ÊàêÂäüË®äÊÅØ
-	info2 BYTE "Error! You don't have enough token.", 0  ; ÊäïÊ≥®Â§±ÊïóË®äÊÅØ
+	info1 BYTE "Success!", 0  ; ßÎ™`¶®•\∞TÆß
+	info2 BYTE "Error! You don't have enough token.", 0  ; ßÎ™`•¢±—∞TÆß
 	gambling_item DWORD OFFSET pt, OFFSET gi1, OFFSET gi2, OFFSET gi3, OFFSET gi4, OFFSET gi5, OFFSET gi6, OFFSET gi7
-	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; Ë≥†Áéá(ÊåâÁÖß‰∏äÈù¢Â≠ó‰∏≤È†ÜÂ∫è)
-	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; Áé©ÂÆ∂‰∏ãÊ≥®Èáè(ÊåâÁÖß‰∏äÈù¢Â≠ó‰∏≤È†ÜÂ∫è)
+	gambling_odds DWORD 2, 2, 4, 4, 6, 8, 10 ; Ωﬂ≤v(´ˆ∑”§W≠±¶r¶Í∂∂ß«)
+	gambling_token DWORD 0, 0, 0, 0, 0, 0, 0 ; ™±Æa§U™`∂q(´ˆ∑”§W≠±¶r¶Í∂∂ß«)
 	result_pos DWORD 0
 	pos DWORD 0
 	money DWORD 0
-	tmp_pos DWORD 0 ; ‰∫§ÊèõÊï∏ÂÄºÁî®ÁöÑ
-	select_index DWORD 0 ;ÈÅ∏Âì™ÂÄã
+	tmp_pos DWORD 0 ; •Ê¥´º∆≠»•Œ™∫
+	select_index DWORD 0 ;øÔ≠˛≠”
 	letter_Bet byte "Enter Bet amount here!!", 0AH,0DH,0
 	letter_Leave byte "Enter BackSpace to leave or space to bet!!", 0AH,0DH,0
-	Beting dword 0; ‰∏ãÊ≥®ÈáëÈ°ç
+	Beting dword 0; §U™`™˜√B
 	round BYTE "Through this round, The money you have has left :  ", 0
 
 	bet_music BYTE "bet.wav", 0
 	slot_music BYTE "slot.wav", 0
 	jackpot_music BYTE "jackpot.wav", 0
 
-	;--- ÁµêÊùü ---
+	;--- µ≤ßÙ ---
 
 .code ;
 
@@ -215,7 +215,7 @@ Interface PROC
 ;-----------------------------------------
 	push ecx
 
-;Á¨¨‰∏ÄÊéíÊ∞¥ÊûúÂçÄ
+;≤ƒ§@±∆§Ù™G∞œ
 
 	call horizon_edge
 	mov count, 0
@@ -258,7 +258,7 @@ line1:
     jne line1
 
 next_line2:
-;Á¨¨‰∫åÊéíÊ∞¥Êûú+Á©∫Ê†º
+;≤ƒ§G±∆§Ù™G+™≈ÆÊ
 	mov cnt, 0		;mario_1
 	mov count, 0
 	mov ecx, 9
@@ -289,7 +289,7 @@ line2:
 	add count, 4
 	loop line2
 
-;Á¨¨‰∏âÊéíÊ∞¥Êûú+Á©∫Ê†º
+;≤ƒ§T±∆§Ù™G+™≈ÆÊ
 	mov cnt, 0    ;mario_2
 	mov count, 0
 	mov ecx, 9
@@ -319,7 +319,7 @@ line3:
 	add count, 4
 	loop line3
 
-;Á¨¨ÂõõÊéíÊ∞¥Êûú+Á©∫Ê†º
+;≤ƒ•|±∆§Ù™G+™≈ÆÊ
 	mov cnt, 0		;mario_3
 	mov count, 0
 	mov ecx, 8
@@ -350,7 +350,7 @@ line4:
 	loop line4
 	
 	call horizon_edge
-;Á¨¨‰∫îË°åÊ∞¥Êûú
+;≤ƒ§≠¶Ê§Ù™G
 	mov count, 0
 	mov ecx, 9
 line5:
@@ -468,19 +468,19 @@ play PROC
 	call Randomize
 	mov eax, 50
 	call RandomRange
-	add eax, 20				;Á∏ΩÂÖ±Ë¶ÅËΩâÂπæÊ†º
+	add eax, 20				;¡`¶@≠n¬‡¥XÆÊ
 	mov random_num, eax
 
 	mov eax, random_num
 	call RandomRange
 	inc eax
-	mov now_block, eax		;ÁèæÂú®ËΩâÂà∞ÁöÑ‰ΩçÁΩÆ
+	mov now_block, eax		;≤{¶b¬‡®Ï™∫¶Ï∏m
 	mov ecx, random_num
 	
 rotate:
 	mov dl,0
 	mov dh,0
-	call gotoxy ;Âà∑Êñ∞Ëû¢ÂπïÁï´Èù¢
+	call gotoxy ;®Í∑sø√πıµe≠±
 
 	.IF now_block <= 0
 		add now_block, 19
@@ -488,11 +488,11 @@ rotate:
 		dec now_block
 	.ENDIF
 
-	call Interface		;Áï´‰ªãÈù¢
+	call Interface		;µe§∂≠±
 
 	push ecx
-	INVOKE PlaySound, NULL, NULL, 20001h      ;Êö´ÂÅú‰∏ä‰∏ÄÈ¶ñÈü≥Ê®Ç
-	INVOKE PlaySound, OFFSET slot_music, NULL, 20001h                ;Êí≠ÊîæÈü≥Ê®Ç
+	INVOKE PlaySound, NULL, NULL, 20001h      ;º»∞±§W§@≠∫≠µº÷
+	INVOKE PlaySound, OFFSET slot_music, NULL, 20001h                ;ºΩ©Ò≠µº÷
 	pop ecx
 
 	.IF ecx <= 5
@@ -511,8 +511,8 @@ rotate:
 	loop rotate
 
 	push ecx
-	INVOKE PlaySound, NULL, NULL, 20001h      ;Êö´ÂÅúÈü≥Ê®Ç
-	INVOKE PlaySound, OFFSET jackpot_music, NULL, 20001h                ;Êí≠ÊîæÈü≥Ê®Ç
+	INVOKE PlaySound, NULL, NULL, 20001h      ;º»∞±≠µº÷
+	INVOKE PlaySound, OFFSET jackpot_music, NULL, 20001h                ;ºΩ©Ò≠µº÷
 	pop ecx
 
 	.IF now_block == 9
@@ -525,56 +525,56 @@ play ENDP
 
 ;-----------------------------------------
 bet PROC USES eax ecx edx esi
-; INFO: Áé©ÂÆ∂‰∏ãÊ≥®function
-; REQUIRE: pos(‰ΩçÁΩÆ 0,4,8,...,24), money(ÈáëÈ°ç)
+; INFO: ™±Æa§U™`function
+; REQUIRE: pos(¶Ï∏m 0,4,8,...,24), money(™˜√B)
 ; RETURN: (none)
 ;-----------------------------------------
 	mov esi, pos
 	mov ecx, player_token
 	add ecx, gambling_token[esi]
-	mov eax, money  ; ÈôÑË®ªÔºöeaxÁöÑÂÄºÂú®Ê≠§ÂáΩÂºèÂÖ®Á®ãÈÉΩÊúÉÁÇ∫"Ê¨≤ÊäïÊ≥®‰ª£Âπ£"
+	mov eax, money  ; ™˛µ˘°Geax™∫≠»¶b¶π®Á¶°•˛µ{≥£∑|¨∞"±˝ßÎ™`•NπÙ"
 
-	.IF ecx >= eax  ; Â¶ÇÊûúÁé©ÂÆ∂‰ª£Âπ£ + Â∑≤ÊäïÊ≥®‰ª£Âπ£ >= Ê¨≤ÊäïÊ≥®‰ª£Âπ£
+	.IF ecx >= eax  ; ¶p™G™±Æa•NπÙ + §wßÎ™`•NπÙ >= ±˝ßÎ™`•NπÙ
 		mov ecx, gambling_token[esi]
-		.IF ecx >= eax  ; Â¶ÇÊûúÁé©ÂÆ∂ÊäïÊ≥®ËÆäÂ∞ëÊàñ‰∏çËÆä(Â∑≤ÊäïÊ≥®‰ª£Âπ£ >= Ê¨≤ÊäïÊ≥®‰ª£Âπ£)
-			sub ecx, eax  ; Ë®àÁÆóÂá∫Â∑ÆÈ°ç
-			add ecx, player_token  ; ÊääÈå¢Âä†ÂõûÁµ¶Áé©ÂÆ∂
+		.IF ecx >= eax  ; ¶p™G™±ÆaßÎ™`≈‹§÷©Œ§£≈‹(§wßÎ™`•NπÙ >= ±˝ßÎ™`•NπÙ)
+			sub ecx, eax  ; ≠p∫‚•XÆt√B
+			add ecx, player_token  ; ß‚ø˙•[¶^µπ™±Æa
 			mov player_token, ecx
 		.ELSE
-			sub ecx, eax  ; Ë®àÁÆóÂá∫Â∑ÆÈ°ç
-			add player_token, ecx  ; Âä†Êâ£Â∑ÆÈ°ç
+			sub ecx, eax  ; ≠p∫‚•XÆt√B
+			add player_token, ecx  ; •[¶©Æt√B
 		.ENDIF
 
 		mov gambling_token[esi], eax
 		mov edx, OFFSET info1
 		call WriteString
 		call crlf
-	.ELSE  ; ÊäïÊ≥®‰∏çÊàêÁ´ã
+	.ELSE  ; ßÎ™`§£¶®•ﬂ
 		mov edx, OFFSET info2
 		call WriteString
 		call crlf
 	.ENDIF
 
-	mov tmp_pos, 0 ; Â≠ó‰∏≤‰ΩçÂùÄÂÖàÂ≠òÂà∞tmp_pos
-	mov esi, OFFSET gambling_item ; token ‰ΩçÂùÄ
+	mov tmp_pos, 0 ; ¶r¶Í¶Ïß}•˝¶s®Ïtmp_pos
+	mov esi, OFFSET gambling_item ; token ¶Ïß}
 	mov edx, [esi]
-	call WriteString  ; Âç∞Âá∫Áé©ÂÆ∂tokenÂ≠ó‰∏≤
+	call WriteString  ; ¶L•X™±Æatoken¶r¶Í
 	add esi, 4
 	mov eax, player_token
-	call WriteInt  ; Âç∞Âá∫Áé©ÂÆ∂tokenÊï∏Èáè
+	call WriteInt  ; ¶L•X™±Æatokenº∆∂q
 	call crlf
 	mov ecx, 7
 	L1:
 		mov edx, [esi]
 		call WriteString
 		add esi, 4
-		push esi ; Êö´Â≠ò
+		push esi ; º»¶s
 
 		mov esi, tmp_pos
 		mov eax, gambling_token[esi]
 		call WriteInt
 		add esi, 4
-		mov tmp_pos, esi ; Â≠òÂõûÂéª
+		mov tmp_pos, esi ; ¶s¶^•h
 		pop esi
 		call Crlf
 	loop L1
@@ -583,8 +583,8 @@ bet ENDP
 
 ;-----------------------------------------
 result PROC
-; INFO: Áé©ÂÆ∂‰∏ãÊ≥®function
-; REQUIRE: pos(‰ΩçÁΩÆ 0,4,8,...,24)
+; INFO: ™±Æa§U™`function
+; REQUIRE: pos(¶Ï∏m 0,4,8,...,24)
 ; RETURN: (none)
 ;-----------------------------------------
 
@@ -663,11 +663,16 @@ result ENDP
 
 ;-----------------------------------------
 KeyIn Proc
-;Ëº∏ÂÖ•ÊñπÂêëÈçµ
+;øÈ§J§Ë¶V¡‰
 ;-----------------------------------------
 push eax
 push ecx
+push edx
+push esi
+mov count,0
+
 head:
+	
 	call clrscr
 	mov select_index,0
 	mov ecx, 8
@@ -676,15 +681,14 @@ nline0:
 loop nline0
 
 	mov ecx, 8
-	p0:
+p0:
 	call select_phase_print
-	loop p0
-	call crlf
-	call crlf
-	mov edx,offset letter_Leave
-	call writestring
+loop p0
+	
+	
 	
 wait_L:
+	
 	mov count ,0
 	mov eax, 0
 	invoke getkeystate, VK_LEFT
@@ -717,9 +721,10 @@ left:
 		dec  select_index
 	.ENDIF
 	mov eax, 1
-	;call WriteHex
-	call gotoxy				;Ëû¢ÂπïÊ∏ÖÁ©∫
-	 mov ecx, 8
+	mov dl,0
+	mov dh,0
+	call gotoxy ;®Í∑sø√πıµe≠±			
+    mov ecx, 8
 nline1:
 	 call Crlf
 loop nline1
@@ -739,11 +744,10 @@ right:
 		inc select_index
 	.ENDIF
 	mov eax, 2
-	;call WriteHex
-	call crlf
 	
-	call crlf
-	call gotoxy				;Ëû¢ÂπïÊ∏ÖÁ©∫
+	mov dl,0
+	mov dh,0
+	call gotoxy ;®Í∑sø√πıµe≠±
 	 mov ecx, 8
 nline2:
 	 call Crlf
@@ -757,6 +761,7 @@ loop p2
 	mov edx,offset letter_Leave
 	call writestring
 	call waitmsg
+
 	jmp wait_L
 
 space:
@@ -774,20 +779,25 @@ space:
 
 back:
 	call clrscr
+	
+	pop esi
+	pop edx
 	pop ecx
 	pop eax
-	
 	ret
 KeyIn ENDP
 ;-----------------------------------------
 
 ;-----------------------------------------
 select_phase_print Proc
-;ÈÅ∏ÊìáË¶ÅÊäïÊÆ∫Â∞è
+;øÔæ‹≠nßÎ±˛§p
 ;-----------------------------------------
+    
+	
 	push eax
 	push ecx
- 
+	
+
 	call Crlf
 	call vertical_edge;
 	mov esi, OFFSET watermelon
@@ -823,11 +833,13 @@ select_phase_print Proc
 
 	pop ecx
 	pop eax
+	
+	
 	ret
 select_phase_print ENDP
 ;-----------------------------------------
 Bet_phase_print Proc
-;ÈÅ∏ÊìáË¶ÅÊäïÂ§öÂ∞ë
+;øÔæ‹≠nßÎ¶h§÷
 ;-----------------------------------------
 	PUSHFD
 	push ecx
@@ -848,9 +860,9 @@ loop L1
 	mov eax,select_index
 	mov ebx,4
 	mul ebx
-	mov pos, eax  ; Ê®°Êì¨Èà∫‰øÆÂÇ≥ÂÄºÈÄ≤‰æÜ(4: ÂÇ≥ÂÖ•Èô£ÂàóÁ¨¨2ÂÄã‰ΩçÁΩÆ)
+	mov pos, eax  ; º“¿¿‡±≠◊∂«≠»∂i®”(4: ∂«§J∞}¶C≤ƒ2≠”¶Ï∏m)
 	mov eax, Beting
-	mov money, eax  ; Ê®°Êì¨Èà∫‰øÆÂÇ≥ÂÄºÈÄ≤‰æÜ
+	mov money, eax  ; º“¿¿‡±≠◊∂«≠»∂i®”
 	call bet
 	call waitmsg
 	POPFD
@@ -887,7 +899,6 @@ End_game PROC
 	.ENDIF
 	pop ecx
 	pop eax
-	
 	ret
 End_game ENDP
 ;-------------------------------------------
@@ -897,8 +908,8 @@ start:
 	.IF (player_token == 0)
 		jmp finish
 	.ENDIF
-	INVOKE PlaySound, NULL, NULL, 20001h      ;Êö´ÂÅú‰∏ä‰∏ÄÈ¶ñÈü≥Ê®Ç
-	INVOKE PlaySound, OFFSET bet_music, NULL, 20009h                ;Êí≠ÊîæÈü≥Ê®Ç
+	INVOKE PlaySound, NULL, NULL, 20001h      ;º»∞±§W§@≠∫≠µº÷
+	INVOKE PlaySound, OFFSET bet_music, NULL, 20009h                ;ºΩ©Ò≠µº÷
 
 	call KeyIn
 
@@ -909,12 +920,12 @@ start:
 	call result
 
 	call End_game
-	
+
 	
 loop start
 
 finish:
-	mov eax, 0		;Â≠óËÆäÈªë ÁÇ∫‰∫ÜÁæéËßÄ
+	mov eax, 0		;¶r≈‹∂¬ ¨∞§F¨¸∆[
 	call setTextColor
 	Invoke ExitProcess, 0
 

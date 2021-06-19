@@ -208,6 +208,12 @@ PlaySound PROTO, pszSound:PTR BYTE, hmod:DWORD, fdwSound:DWORD
 
 	;--- 結束 ---
 
+	;---以下為鈺修用到的東西--
+	again_text BYTE "Do you wanna keep going (Y/N)??",0dh,0ah,0
+	end_flag BYTE 1				;1為繼續玩/0為不玩了
+	end_text BYTE "Thanks for your playing!!!!",0dh,0ah,0
+	;---結束---
+
 .code ;
 
 ;-----------------------------------------
@@ -902,12 +908,27 @@ End_game PROC
 	ret
 End_game ENDP
 ;-------------------------------------------
+ask_again PROC
+	mov end_flag, 1
+	mov eax,0
+	mov edx ,OFFSET again_text
+	call crlf
+	call WriteString
+	call ReadChar
+	call ReadChar
+
+	cmp eax, 12654
+	je replay
+	ret
+replay:
+	mov end_flag, 0
+	ret
+ask_again ENDP
+
 main PROC
 
 start:
-	.IF (player_token == 0)
-		jmp finish
-	.ENDIF
+	
 	INVOKE PlaySound, NULL, NULL, 20001h      ;暫停上一首音樂
 	INVOKE PlaySound, OFFSET bet_music, NULL, 20009h                ;播放音樂
 
@@ -921,12 +942,26 @@ start:
 
 	call End_game
 
-	
+	.IF (player_token == 0)
+		jmp finish
+	.ENDIF
+
+	call ask_again
+
+	.IF(end_flag == 0)
+		mov edx,OFFSET end_text
+		call clrscr
+		call WriteString
+		call WaitMsg
+		jmp finish
+	.ENDIF
+
 loop start
 
 finish:
 	mov eax, 0		;字變黑 為了美觀
 	call setTextColor
+
 	Invoke ExitProcess, 0
 
 main ENDP
